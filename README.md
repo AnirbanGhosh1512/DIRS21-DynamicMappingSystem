@@ -28,3 +28,67 @@ MapperFactory:
 
 Factory that registers and provides mappers based on the model types being mapped.
 Uses a Dictionary<string, IModelMapper> to map specific model transformations.
+
+
+Directory Structure:
+
+├── Models
+│   ├── Models
+│   │   ├── Reservation.cs
+│   │   ├── Room.cs
+│   ├── DTO
+│   │   ├── ReservationDTO.cs
+│   │   ├── RoomDTO.cs
+│   ├── PartnerModels
+│   │   ├── GoogleReservation.cs
+│   │   ├── GoogleRoom.cs
+├── Mappers
+│   ├── IModelMapper.cs
+│   ├── ReservationToReservationDTOMapper.cs
+│   ├── RoomToRoomDTOMapper.cs
+│   ├── ReservationDTOToGoogleReservationMapper.cs
+│   ├── RoomDTOToGoogleRoomMapper.cs
+│   ├── GoogleRoomDTOToRoomMapper.cs
+├── MapHandler.cs
+├── MapperFactory.cs
+└── Program.cs
+
+How It Works:
+The system dynamically maps data between different models using mappers. Here’s how the system flows:
+
+Internal Model to DTO: The first step in many mappings is transforming an internal model (like Room) to a DTO.
+DTO to External Model: The second step maps the DTO to an external system’s model (like GoogleRoom).
+
+Example Mapping Flow:
+Room (DIRS21) → RoomDTO → GoogleRoom (Google)
+By using the MapperFactory, the system dynamically selects the correct mappers based on the source and target models. If no mapper is found for the provided types, an exception is thrown.
+
+Key Features:
+Dynamic Mappings: Easily add new mappers without modifying existing code. Just register the new mapper in the MapperFactory.
+DTO as Decoupling Layer: The use of DTOs ensures that the internal and external models remain decoupled, allowing the system to adapt to future changes more easily.
+Error Handling: Custom exceptions (InvalidMappingException, MappingValidationException) are used to handle errors gracefully.
+
+Modify Mappings:
+To add a new mapping between internal and external models:
+
+Create a new mapper class (e.g., RoomDTOToBookingRoomMapper).
+Implement the IModelMapper interface.
+Register the mapper in MapperFactory.
+
+Error Handling:
+If a mapping fails (e.g., no mapper is found or the input model is invalid), you will see an error message, and the exception will be logged if logging is enabled.
+
+Logging:
+This system includes Serilog for logging. The logs are written both to the console and to a file located in the logs folder. You can configure the logging behavior in Program.cs.
+
+Known Issues:
+Unmapped Models: If a specific mapping is not registered in the MapperFactory, an InvalidMappingException will be thrown.
+
+Null Values: Ensure that models passed into the MapHandler are valid and fully populated.
+Future Enhancements
+Support for Additional External Systems: You can add new partners (e.g., Booking.com, Expedia) by creating new mappers for their respective models.
+
+Validation Logic: Add more complex validation mechanisms before performing mappings.
+
+Contact:
+For any questions or issues, feel free to contact [anirban.ghosh1512@gmail.com].
