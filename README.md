@@ -40,14 +40,28 @@ Directory Structure:
 │   ├── DTO
 │   │   ├── ReservationDTO.cs
 │   │   ├── RoomDTO.cs
-├── Mappers
-│   ├── IModelMapper.cs
-│   ├── ReservationToReservationDTOMapper.cs
-│   ├── RoomToRoomDTOMapper.cs
-│   ├── ReservationDTOToGoogleReservationMapper.cs
-│   ├── RoomDTOToGoogleRoomMapper.cs
-│   ├── GoogleRoomDTOToRoomMapper.cs
-├── MapHandler.cs
+├── DTOMappers
+│   ├── IMapper.cs
+│   ├── DIRS21ReservationDTOMapper.cs
+│   ├── DIRS21ReservationMapper.cs
+│   ├── GoogleReservationDTOMapper.cs
+│   ├── GoogleReservationMapper.cs
+│   ├── GoogleRoomMapper.cs
+│   ├── GoogleRoomDTOMapper.cs
+│   ├── DIRS21RoomDTOMapper.cs
+│   ├── DIRS21RoomMapper.cs
+├── Services
+│   ├── MapHandler.cs
+├── ReadFile
+│   ├── ReadFromFiles.cs
+├── Exceptions
+│   ├── InvalidMappingException.cs
+│   ├── MappingValidationException.cs
+├── Tests
+│   ├── DIRS21RoomMapperTest.cs
+│   ├── DIRS21ReservationMapperTest.cs
+│   ├── GoogleReservationMapperTest.cs
+│   ├── GoogleRoomMapperTest.cs
 └── Program.cs
 
 How It Works:
