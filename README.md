@@ -1,10 +1,9 @@
 # DIRS21-DynamicMappingSystem
-DynamicMappingSystem DIRS21 Code-Base.
 
-Dynamic Mapping System - DIRS21 to External Systems
+Dynamic Mapping System - DIRS21 to External Systems:
 This project implements a dynamic mapping system for the DIRS21 platform, providing a flexible and scalable way to map data between DIRS21 internal models and external models used by partners (e.g., Google). The system is designed to be extensible, following SOLID principles and leveraging design patterns like the Factory Pattern to handle multiple mappings between internal models, DTOs (Data Transfer Objects), and external models.
 
-Project Structure
+Project Structure:
 
 Core Components:
 
@@ -36,12 +35,11 @@ Directory Structure:
 │   ├── Models
 │   │   ├── Reservation.cs
 │   │   ├── Room.cs
+│   │   ├── GoogleReservation.cs
+│   │   ├── GoogleRoom.cs
 │   ├── DTO
 │   │   ├── ReservationDTO.cs
 │   │   ├── RoomDTO.cs
-│   ├── PartnerModels
-│   │   ├── GoogleReservation.cs
-│   │   ├── GoogleRoom.cs
 ├── Mappers
 │   ├── IModelMapper.cs
 │   ├── ReservationToReservationDTOMapper.cs
@@ -50,7 +48,6 @@ Directory Structure:
 │   ├── RoomDTOToGoogleRoomMapper.cs
 │   ├── GoogleRoomDTOToRoomMapper.cs
 ├── MapHandler.cs
-├── MapperFactory.cs
 └── Program.cs
 
 How It Works:
@@ -64,8 +61,9 @@ Room (DIRS21) → RoomDTO → GoogleRoom (Google)
 By using the MapperFactory, the system dynamically selects the correct mappers based on the source and target models. If no mapper is found for the provided types, an exception is thrown.
 
 Key Features:
-Dynamic Mappings: Easily add new mappers without modifying existing code. Just register the new mapper in the MapperFactory.
+Dynamic Mappings: Easily add new mappers without modifying existing code. 
 DTO as Decoupling Layer: The use of DTOs ensures that the internal and external models remain decoupled, allowing the system to adapt to future changes more easily.
+
 Error Handling: Custom exceptions (InvalidMappingException, MappingValidationException) are used to handle errors gracefully.
 
 Modify Mappings:
@@ -85,7 +83,7 @@ Known Issues:
 Unmapped Models: If a specific mapping is not registered in the MapperFactory, an InvalidMappingException will be thrown.
 
 Null Values: Ensure that models passed into the MapHandler are valid and fully populated.
-Future Enhancements
+Future Enhancements:
 Support for Additional External Systems: You can add new partners (e.g., Booking.com, Expedia) by creating new mappers for their respective models.
 
 Validation Logic: Add more complex validation mechanisms before performing mappings.
